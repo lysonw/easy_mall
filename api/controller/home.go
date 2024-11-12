@@ -48,20 +48,5 @@ func NewProductsOnline(c *gin.Context) {
 }
 
 func HotProductsRecommend(c *gin.Context) {
-	var param request.RotateListReq
-	err := c.ShouldBind(&param)
-	if err != nil {
-		log.Println(err)
-		util.ErrorReturn(c, code.ParamError, code.ParamErrorMsg)
-		return
-	}
 
-	res, err := new(service.Home).RotateList(c, param.Num)
-	if err != nil {
-		log.Println(err)
-		util.ErrorReturn(c, code.ServiceRotateError, code.ServiceRotateErrorMsg)
-		return
-	}
-
-	util.SuccessReturn(c, res)
 }

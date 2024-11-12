@@ -15,6 +15,7 @@ import (
 
 func main() {
 	init.InitMySQL()
+
 	srv := &http.Server{
 		Addr:    ":" + "8080",
 		Handler: v1.NewRouter(),
