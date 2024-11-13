@@ -68,3 +68,37 @@ func (h *Home) NewProductList(ctx context.Context, req request.NewProductReq) (r
 	res.PageSize = req.PageParam.PageSize
 	return
 }
+
+func (h *Home) HotProductList(ctx context.Context, req request.HotProductReq) (res respond.HotProductResp, err error) {
+
+	list, total, err := dao.NewProductDao(ctx).HotList(req.PageParam)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	for _, v := range list {
+		item := respond.ProductInfo{
+			Pid:           v.Pid,
+			PCode:         v.PCode,
+			Name:          v.Name,
+			Color:         v.Color,
+			Size:          v.Size,
+			ImagPath:      v.ImagPath,
+			Title:         v.Title,
+			SubTitle:      v.SubTitle,
+			Description:   v.Description,
+			Price:         v.Price,
+			SaleTime:      v.SaleTime,
+			ProductStatus: v.ProductStatus,
+			Status:        v.Status,
+			Inventory:     v.Inventory,
+		}
+		res.List = append(res.List, item)
+	}
+
+	res.Total = total
+	res.Page = req.PageParam.Page
+	res.PageSize = req.PageParam.PageSize
+	return
+}

@@ -26,3 +26,10 @@ type PageResp struct {
 	PageSize int   `json:"pageSize"`
 	Total    int64 `json:"total"`
 }
+
+type ProductClickRecord struct {
+	Uid       string `json:"uid"`
+	Pid       uint64 `json:"pid"`
+	PCode     string `json:"p_code"`
+	ClickTime string `json:"click_time"`
+}

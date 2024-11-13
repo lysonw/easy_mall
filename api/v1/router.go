@@ -10,20 +10,22 @@ func NewRouter() *gin.Engine {
 
 	v1 := r.Group("api/v1")
 	{
-
+		// 暂时先不做登录这一块的内容
 		v1.GET("login")     // 登录
 		v1.POST("register") // 注册
-
-		callback := v1.Group("callback")
-		{
-			callback.POST("click") // 点击事件回调
-		}
 
 		home := v1.Group("home")
 		{
 			home.GET("rotate", controller.RotateList)        // 首页轮播
 			home.GET("new", controller.NewProductsOnline)    // 新品商品推荐
 			home.GET("hot", controller.HotProductsRecommend) // 热点上坪推荐
+		}
+
+		product := v1.Group("product")
+		{
+			product.GET("detail", controller.ProductDetail)              // 商品详情
+			product.GET("list", controller.ProductList)                  // 商品列表
+			product.GET("category/list", controller.ProductCategoryList) // 分类列表
 		}
 
 	}

@@ -40,7 +40,7 @@ func NewProductsOnline(c *gin.Context) {
 	res, err := new(service.Home).NewProductList(c, param)
 	if err != nil {
 		log.Println(err)
-		util.ErrorReturn(c, code.ServiceRotateError, code.ServiceRotateErrorMsg)
+		util.ErrorReturn(c, code.ServiceProductsOnlineError, code.ServiceProductsOnlineErrorMsg)
 		return
 	}
 
@@ -48,5 +48,20 @@ func NewProductsOnline(c *gin.Context) {
 }
 
 func HotProductsRecommend(c *gin.Context) {
+	var param request.HotProductReq
+	err := c.ShouldBind(&param)
+	if err != nil {
+		log.Println(err)
+		util.ErrorReturn(c, code.ParamError, code.ParamErrorMsg)
+		return
+	}
 
+	res, err := new(service.Home).HotProductList(c, param)
+	if err != nil {
+		log.Println(err)
+		util.ErrorReturn(c, code.ServiceHotProductListError, code.ServiceHotProductListErrorMsg)
+		return
+	}
+
+	util.SuccessReturn(c, res)
 }
