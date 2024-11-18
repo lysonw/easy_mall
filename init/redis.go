@@ -8,9 +8,9 @@ import (
 )
 
 var RedisClient *redis.Client
-var RedisContext = context.Background()
 
 func InitCache() {
+	var RedisContext = context.Background()
 	client := redis.NewClient(&redis.Options{
 		Addr:     fmt.Sprintf("%s:%s", config.RedisHost, config.RedisPort),
 		Username: config.RedisUsername,

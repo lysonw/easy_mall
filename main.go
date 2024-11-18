@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	v1 "easy_mall/api/v1"
-	"easy_mall/init"
+	i "easy_mall/init"
+	"easy_mall/script"
 	"errors"
 	"log"
 	"net/http"
@@ -14,10 +15,12 @@ import (
 )
 
 func main() {
-	init.InitMySQL()
+	i.InitMySQL()
+	i.InitCache()
+	script.ProductClickRecordDaemon()
 
 	srv := &http.Server{
-		Addr:    ":" + "8080",
+		Addr:    ":" + "6111",
 		Handler: v1.NewRouter(),
 	}
 

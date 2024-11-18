@@ -2,7 +2,7 @@ package dao
 
 import (
 	"context"
-	"easy_mall/init"
+	i "easy_mall/init"
 	"easy_mall/repository/db/model"
 	"gorm.io/gorm"
 	"log"
@@ -13,7 +13,7 @@ type RotateDao struct {
 }
 
 func NewRotateDao(ctx context.Context) *RotateDao {
-	return &RotateDao{init.DBClient(ctx)}
+	return &RotateDao{i.DBClient(ctx)}
 }
 
 func (dao *RotateDao) List(limit int) (list []model.Rotate, err error) {

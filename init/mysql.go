@@ -9,9 +9,7 @@ import (
 	"time"
 )
 
-var (
-	DB *gorm.DB
-)
+var DB *gorm.DB
 
 func InitMySQL() {
 	db, err := gorm.Open(mysql.New(mysql.Config{

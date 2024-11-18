@@ -4,7 +4,12 @@ import (
 	"context"
 	"easy_mall/model/request"
 	"easy_mall/model/respond"
+	"easy_mall/repository/cache"
 	"easy_mall/repository/db/dao"
+	"easy_mall/repository/db/model"
+	"encoding/json"
+	"errors"
+	"github.com/redis/go-redis/v9"
 	"log"
 	"time"
 )
@@ -13,10 +18,30 @@ type Home struct {
 }
 
 func (h *Home) RotateList(ctx context.Context, limit int) (res []respond.RotateListResp, err error) {
-	list, err := dao.NewRotateDao(ctx).List(limit)
-	if err != nil {
+	var list []model.Rotate
+	c := cache.Cache{Ctx: ctx}
+	cacheData, err := c.Get(cache.RotateListCacheKey)
+	if err != nil && !errors.Is(err, redis.Nil) {
 		log.Println(err)
 		return
+	}
+
+	if cacheData != "" {
+		if err = json.Unmarshal([]byte(cacheData), &list); err != nil {
+			log.Println(err)
+			return
+		}
+	} else {
+		list, err = dao.NewRotateDao(ctx).List(limit)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		err = c.Set(cache.RotateListCacheKey, list, time.Second*10)
+		if err != nil {
+			log.Println(err)
+			return
+		}
 	}
 
 	for _, v := range list {

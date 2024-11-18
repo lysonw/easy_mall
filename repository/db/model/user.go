@@ -10,3 +10,7 @@ type User struct {
 	Password string // 密码
 	gorm.Model
 }
+
+func (u *User) TableName() string {
+	return "user"
+}

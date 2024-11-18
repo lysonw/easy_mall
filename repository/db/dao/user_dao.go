@@ -2,7 +2,7 @@ package dao
 
 import (
 	"context"
-	"easy_mall/init"
+	i "easy_mall/init"
 	"easy_mall/repository/db/model"
 	"gorm.io/gorm"
 	"log"
@@ -13,7 +13,7 @@ type UserDao struct {
 }
 
 func NewUserDao(ctx context.Context) *UserDao {
-	return &UserDao{init.DBClient(ctx)}
+	return &UserDao{i.DBClient(ctx)}
 }
 
 func (dao *UserDao) Insert(info model.User) (err error) {

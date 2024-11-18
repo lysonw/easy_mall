@@ -43,3 +43,7 @@ type Product struct {
 	Inventory     int             // 库存数量
 	gorm.Model
 }
+
+func (p *Product) TableName() string {
+	return "product"
+}

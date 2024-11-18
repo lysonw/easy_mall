@@ -9,3 +9,7 @@ type ClickRecord struct {
 	ClickTime string // 点击时间
 	gorm.Model
 }
+
+func (c *ClickRecord) TableName() string {
+	return "click_record"
+}

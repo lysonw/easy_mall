@@ -20,3 +20,7 @@ type Rotate struct {
 	Pid      uint64
 	ImagPath string
 }
+
+func (r *Rotate) TableName() string {
+	return "rotate"
+}
