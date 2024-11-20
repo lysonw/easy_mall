@@ -7,7 +7,6 @@ type RotateListReq struct {
 }
 
 type NewProductReq struct {
-	PCode string `form:"p_code" json:"p_code"`
 	model.PageParam
 }
 

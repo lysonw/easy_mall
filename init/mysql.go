@@ -3,9 +3,11 @@ package init
 import (
 	"context"
 	"easy_mall/config"
+	"easy_mall/repository/db/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"log"
 	"time"
 )
 
@@ -33,6 +35,11 @@ func InitMySQL() {
 	sqlDB.SetMaxOpenConns(100) // 打开
 	sqlDB.SetConnMaxLifetime(time.Second * 30)
 	DB = db
+
+	err = db.AutoMigrate(&model.Product{}, &model.ClickRecord{})
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func DBClient(ctx context.Context) *gorm.DB {

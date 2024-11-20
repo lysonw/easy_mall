@@ -29,7 +29,7 @@ type PageResp struct {
 
 type ProductClickRecord struct {
 	Uid       string `json:"uid"`
-	Pid       uint64 `json:"pid"`
+	Pid       string `json:"pid"`
 	PCode     string `json:"p_code"`
 	ClickTime int64  `json:"click_time"`
 }

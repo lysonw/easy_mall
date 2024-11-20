@@ -21,20 +21,24 @@ func (p *ProductService) GetProductDetail(ctx context.Context, req request.Produ
 		return
 	}
 	info := respond.ProductInfo{
-		Pid:           detail.Pid,
-		PCode:         detail.PCode,
-		Name:          detail.Name,
-		Color:         detail.Color,
-		Size:          detail.Size,
-		ImagPath:      detail.ImagPath,
-		Title:         detail.Title,
-		SubTitle:      detail.SubTitle,
-		Description:   detail.Description,
-		Price:         detail.Price,
-		SaleTime:      detail.SaleTime,
-		ProductStatus: detail.ProductStatus,
-		Status:        detail.Status,
-		Inventory:     detail.Inventory,
+		ID:             detail.ID,
+		Pid:            detail.Pid,
+		PCode:          detail.PCode,
+		Name:           detail.Name,
+		Color:          detail.Color,
+		Size:           detail.Size,
+		ImagPath:       detail.ImagPath,
+		Title:          detail.Title,
+		SubTitle:       detail.SubTitle,
+		Description:    detail.Description,
+		Price:          detail.Price,
+		SaleTime:       detail.SaleTime,
+		AlbumPics:      detail.AlbumPics,
+		PromotionPrice: detail.PromotionPrice,
+		OriginalPrice:  detail.OriginalPrice,
+		Inventory:      detail.Inventory,
+		Sale:           detail.Sale,
+		StockStatus:    detail.StockStatus,
 	}
 	res.ProductInfo = info
 
@@ -66,22 +70,26 @@ func (p *ProductService) GetProductList(ctx context.Context, req request.Product
 		return
 	}
 
-	for _, detail := range data {
+	for _, v := range data {
 		item := respond.ProductInfo{
-			Pid:           detail.Pid,
-			PCode:         detail.PCode,
-			Name:          detail.Name,
-			Color:         detail.Color,
-			Size:          detail.Size,
-			ImagPath:      detail.ImagPath,
-			Title:         detail.Title,
-			SubTitle:      detail.SubTitle,
-			Description:   detail.Description,
-			Price:         detail.Price,
-			SaleTime:      detail.SaleTime,
-			ProductStatus: detail.ProductStatus,
-			Status:        detail.Status,
-			Inventory:     detail.Inventory,
+			ID:             v.ID,
+			Pid:            v.Pid,
+			PCode:          v.PCode,
+			Name:           v.Name,
+			Color:          v.Color,
+			Size:           v.Size,
+			ImagPath:       v.ImagPath,
+			Title:          v.Title,
+			SubTitle:       v.SubTitle,
+			Description:    v.Description,
+			Price:          v.Price,
+			SaleTime:       v.SaleTime,
+			AlbumPics:      v.AlbumPics,
+			PromotionPrice: v.PromotionPrice,
+			OriginalPrice:  v.OriginalPrice,
+			Inventory:      v.Inventory,
+			Sale:           v.Sale,
+			StockStatus:    v.StockStatus,
 		}
 		res.List = append(res.List, item)
 	}
@@ -115,22 +123,26 @@ func (p *ProductService) GetProductCategoryList(ctx context.Context, req request
 		return
 	}
 
-	for _, detail := range data {
+	for _, v := range data {
 		item := respond.ProductInfo{
-			Pid:           detail.Pid,
-			PCode:         detail.PCode,
-			Name:          detail.Name,
-			Color:         detail.Color,
-			Size:          detail.Size,
-			ImagPath:      detail.ImagPath,
-			Title:         detail.Title,
-			SubTitle:      detail.SubTitle,
-			Description:   detail.Description,
-			Price:         detail.Price,
-			SaleTime:      detail.SaleTime,
-			ProductStatus: detail.ProductStatus,
-			Status:        detail.Status,
-			Inventory:     detail.Inventory,
+			ID:             v.ID,
+			Pid:            v.Pid,
+			PCode:          v.PCode,
+			Name:           v.Name,
+			Color:          v.Color,
+			Size:           v.Size,
+			ImagPath:       v.ImagPath,
+			Title:          v.Title,
+			SubTitle:       v.SubTitle,
+			Description:    v.Description,
+			Price:          v.Price,
+			SaleTime:       v.SaleTime,
+			AlbumPics:      v.AlbumPics,
+			PromotionPrice: v.PromotionPrice,
+			OriginalPrice:  v.OriginalPrice,
+			Inventory:      v.Inventory,
+			Sale:           v.Sale,
+			StockStatus:    v.StockStatus,
 		}
 		res.List = append(res.List, item)
 	}

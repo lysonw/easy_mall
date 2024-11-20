@@ -3,6 +3,7 @@ package model
 import "gorm.io/gorm"
 
 type User struct {
+	ID       int64  `json:"id" gorm:"id"`
 	Uid      string // 唯一标识
 	Nickname string // 昵称
 	Phone    string // 电话
