@@ -17,8 +17,9 @@ CREATE TABLE `rotate` (
 
 type Rotate struct {
 	gorm.Model
-	Pid      uint64
-	ImagPath string
+	ID      int64  `json:"id" gorm:"id"`
+	Pid     int64  `json:"pid" gorm:"pid"`           // 商品id
+	ImgPath string `json:"img_path" gorm:"img_path"` // 图片地址
 }
 
 func (r *Rotate) TableName() string {

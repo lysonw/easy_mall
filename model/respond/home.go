@@ -15,7 +15,7 @@ type NewProductResp struct {
 	List []ProductInfo `json:"list"`
 }
 type ProductInfo struct {
-	Pid           uint64          `json:"pid"`            // 商品id
+	Pid           int64           `json:"pid"`            // 商品id
 	PCode         string          `json:"PCode"`          // 商品编号
 	Name          string          `json:"name"`           // 商品名称
 	Color         uint8           `json:"color"`          // 商品颜色

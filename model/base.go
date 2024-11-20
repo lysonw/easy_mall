@@ -31,5 +31,5 @@ type ProductClickRecord struct {
 	Uid       string `json:"uid"`
 	Pid       uint64 `json:"pid"`
 	PCode     string `json:"p_code"`
-	ClickTime string `json:"click_time"`
+	ClickTime int64  `json:"click_time"`
 }

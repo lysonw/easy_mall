@@ -3,7 +3,7 @@ package request
 import base "easy_mall/model"
 
 type ProductDetailReq struct {
-	Pid uint64 `form:"pid" json:"pid" binding:"require"` // 商品id
+	Pid uint64 `form:"pid" json:"pid" binding:"required"` // 商品id
 }
 
 type ProductCategoryListReq struct {
@@ -11,6 +11,6 @@ type ProductCategoryListReq struct {
 }
 
 type ProductListReq struct {
-	PCode string `form:"pid" json:"p_code" binding:"require"`
+	PCode string `form:"pid" json:"p_code" binding:"required"`
 	base.PageParam
 }

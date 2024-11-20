@@ -17,7 +17,7 @@ import (
 )
 
 /*
-	todo:这边后续可以优化成批量写
+	todo:这边后续可以将redis切换成mq
 */
 
 // ProductClickRecordHandleScript  注意：lua脚本会将redis的nil转换成false
@@ -77,7 +77,7 @@ loop:
 			}
 
 			// 这边不进行异步处理，防止数据量大的情况下开启过多的goroutine
-			batchInsertClickRecordData(subCtx, values)
+			batchInsertClickRecordData(ctx, values)
 		}
 	}
 }
@@ -117,6 +117,7 @@ func DoProductClickRecordHandleScript(key string, batchNum int) (res []string, e
 func batchInsertClickRecordData(ctx context.Context, values []string) {
 	records := make([]model.ClickRecord, 0, len(values))
 	for _, v := range values {
+		log.Printf("%+v \n", v)
 		var item model.ClickRecord
 		if err := json.Unmarshal([]byte(v), &item); err != nil {
 			log.Println(err)

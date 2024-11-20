@@ -7,6 +7,7 @@ import (
 	"easy_mall/model/respond"
 	"easy_mall/repository/cache"
 	"easy_mall/repository/db/dao"
+	"encoding/json"
 	"log"
 	"time"
 )
@@ -42,10 +43,14 @@ func (p *ProductService) GetProductDetail(ctx context.Context, req request.Produ
 		Uid:       "",
 		Pid:       detail.Pid,
 		PCode:     detail.PCode,
-		ClickTime: time.Now().Format(time.DateTime),
+		ClickTime: time.Now().Unix(),
+	}
+	b, err := json.Marshal(record)
+	if err != nil {
+		log.Println(err)
 	}
 	c := cache.Cache{Ctx: ctx}
-	if err = c.LPush(cache.ProductClickRecordCacheKey, record); err != nil {
+	if err = c.LPush(cache.ProductClickRecordCacheKey, string(b)); err != nil {
 		return
 	}
 
