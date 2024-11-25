@@ -30,3 +30,14 @@ func (dao *ClickRecordDao) BatchInsert(data []model.ClickRecord, batchSize int) 
 	}
 	return
 }
+
+func (dao *ClickRecordDao) HotProductCalculate(start, end int64) (data []model.ClickRecord, err error) {
+	err = dao.DB.Model(&model.ClickRecord{}).Select("pid, sum(click_count) as click_count").
+		Where("click_time BETWEEN ? AND ?", start, end).
+		Group("pid").
+		Order("").Find(&data).Error
+	if err != nil {
+		return
+	}
+	return
+}

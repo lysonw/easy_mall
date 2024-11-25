@@ -35,13 +35,15 @@ func InitMySQL() {
 	sqlDB.SetMaxOpenConns(100) // 打开
 	sqlDB.SetConnMaxLifetime(time.Second * 30)
 	DB = db
-
-	err = db.AutoMigrate(&model.Product{}, &model.ClickRecord{})
-	if err != nil {
-		log.Println(err)
-	}
 }
 
 func DBClient(ctx context.Context) *gorm.DB {
 	return DB.WithContext(ctx)
+}
+
+func InitTable() {
+	err := DB.AutoMigrate(&model.Product{}, &model.ClickRecord{})
+	if err != nil {
+		log.Println(err)
+	}
 }

@@ -4,8 +4,8 @@ go 1.23.2
 
 require (
 	github.com/gin-gonic/gin v1.10.0
-	github.com/jinzhu/gorm v1.9.16
 	github.com/redis/go-redis/v9 v9.7.0
+	github.com/robfig/cron/v3 v3.0.0
 	github.com/shopspring/decimal v1.4.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.7

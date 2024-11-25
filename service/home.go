@@ -40,18 +40,26 @@ func (h *Home) RotateList(ctx context.Context, limit int) (res []respond.RotateL
 			log.Println(err)
 			return
 		}
-		err = c.Set(cache.RotateListCacheKey, list, 10*time.Second)
-		if err != nil {
-			log.Println(err)
-			return
-		}
 	}
 
 	for _, v := range list {
 		var item respond.RotateListResp
 		item.Pid = v.Pid
 		item.ImagPath = v.ImagPath
+		item.Title = v.Title
 		res = append(res, item)
+	}
+
+	var b []byte
+	b, err = json.Marshal(res)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	err = c.Set(cache.RotateListCacheKey, string(b), 10*time.Minute)
+	if err != nil {
+		log.Println(err)
+		return
 	}
 
 	return
@@ -60,7 +68,7 @@ func (h *Home) RotateList(ctx context.Context, limit int) (res []respond.RotateL
 func (h *Home) NewProductList(ctx context.Context, req request.NewProductReq) (res respond.NewProductResp, err error) {
 	condition := make(map[string]interface{})
 	condition["new_status"] = 1
-	list, total, err := dao.NewProductDao(ctx).List(condition, req.PageParam)
+	list, total, err := dao.NewProductDao(ctx).List(condition, req.PageParam.Verify())
 	if err != nil {
 		log.Println(err)
 		return
@@ -99,7 +107,7 @@ func (h *Home) NewProductList(ctx context.Context, req request.NewProductReq) (r
 func (h *Home) HotProductList(ctx context.Context, req request.HotProductReq) (res respond.HotProductResp, err error) {
 	condition := make(map[string]interface{})
 	condition["recommend_status"] = 1
-	list, total, err := dao.NewProductDao(ctx).List(condition, req.PageParam)
+	list, total, err := dao.NewProductDao(ctx).List(condition, req.PageParam.Verify())
 	if err != nil {
 		log.Println(err)
 		return

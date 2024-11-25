@@ -8,6 +8,7 @@ import (
 type RotateListResp struct {
 	Pid      string `json:"pid"`
 	ImagPath string `json:"imag_path"`
+	Title    string `json:"title"`
 }
 
 type NewProductResp struct {
@@ -17,7 +18,7 @@ type NewProductResp struct {
 type ProductInfo struct {
 	ID             int64           `json:"id"`
 	Pid            string          `json:"pid"`             // 商品id
-	PCode          string          `json:"PCode"`           // 商品编号
+	PCode          string          `json:"p_code"`          // 商品编号
 	Name           string          `json:"name"`            // 商品名称
 	Color          uint8           `json:"color"`           // 商品颜色
 	Size           string          `json:"size"`            // 商品尺寸

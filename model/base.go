@@ -3,11 +3,11 @@ package model
 import "easy_mall/consts"
 
 type PageParam struct {
-	Page     int `json:"page"`
-	PageSize int `json:"pageSize"`
+	Page     int `json:"page" form:"page"`
+	PageSize int `json:"page_size" form:"page_size"`
 }
 
-func (p *PageParam) Verify() *PageParam {
+func (p PageParam) Verify() PageParam {
 	if p.Page == 0 {
 		p.Page = consts.PageDefault
 	}
@@ -23,7 +23,7 @@ func (p *PageParam) Verify() *PageParam {
 
 type PageResp struct {
 	Page     int   `json:"page"`
-	PageSize int   `json:"pageSize"`
+	PageSize int   `json:"page_size"`
 	Total    int64 `json:"total"`
 }
 

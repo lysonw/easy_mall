@@ -3,14 +3,14 @@ package request
 import base "easy_mall/model"
 
 type ProductDetailReq struct {
-	Pid uint64 `form:"pid" json:"pid" binding:"required"` // 商品id
+	Pid string `json:"pid" form:"pid" binding:"required"` // 商品id
 }
 
 type ProductCategoryListReq struct {
-	Time string `json:"time"` // 时间 YYYY-MM-DD
+	Time string `json:"time" form:"time"` // 时间 YYYY-MM-DD
 }
 
 type ProductListReq struct {
-	PCode string `form:"pid" json:"p_code" binding:"required"`
+	PCode string `json:"p_code" form:"p_code" binding:"required"`
 	base.PageParam
 }

@@ -11,7 +11,7 @@ func getProductCategoryTimeRange(timestamp string) (start, end string, err error
 		end = time.Now().Format(consts.TimeFormatYearAndMoth)
 	} else {
 		var t time.Time
-		if t, err = time.Parse(timestamp, time.DateOnly); err != nil {
+		if t, err = time.Parse(time.DateOnly, timestamp); err != nil {
 			return
 		}
 		start = t.Format(consts.TimeFormatYearAndMoth)

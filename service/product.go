@@ -61,7 +61,6 @@ func (p *ProductService) GetProductDetail(ctx context.Context, req request.Produ
 	return
 }
 func (p *ProductService) GetProductList(ctx context.Context, req request.ProductListReq) (res respond.ProductListResp, err error) {
-
 	condition := make(map[string]interface{})
 	condition["p_code"] = req.PCode
 	data, total, err := dao.NewProductDao(ctx).List(condition, req.PageParam)
@@ -124,25 +123,11 @@ func (p *ProductService) GetProductCategoryList(ctx context.Context, req request
 	}
 
 	for _, v := range data {
-		item := respond.ProductInfo{
-			ID:             v.ID,
-			Pid:            v.Pid,
-			PCode:          v.PCode,
-			Name:           v.Name,
-			Color:          v.Color,
-			Size:           v.Size,
-			ImagPath:       v.ImagPath,
-			Title:          v.Title,
-			SubTitle:       v.SubTitle,
-			Description:    v.Description,
-			Price:          v.Price,
-			SaleTime:       v.SaleTime,
-			AlbumPics:      v.AlbumPics,
-			PromotionPrice: v.PromotionPrice,
-			OriginalPrice:  v.OriginalPrice,
-			Inventory:      v.Inventory,
-			Sale:           v.Sale,
-			StockStatus:    v.StockStatus,
+		item := respond.CategoryList{
+			PCode:    v.PCode,
+			ImagPath: v.ImagPath,
+			Title:    v.Title,
+			SubTitle: v.SubTitle,
 		}
 		res.List = append(res.List, item)
 	}
